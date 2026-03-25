@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ACSC Group 8 | Home</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* ---- HERO ---- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 0 40px;
+    }
+
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 900px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 168, 255, 0.1);
+      border: 1px solid var(--border-glow);
+      border-radius: 50px;
+      padding: 8px 20px;
+      font-family: var(--font-display);
+      font-size: 0.6rem;
+      letter-spacing: 3px;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      animation: fadeInUp 0.8s ease both;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--accent-cyan);
+      border-radius: 50%;
+      animation: pulse 1.5s ease infinite;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 7vw, 5.5rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.05;
+      margin-bottom: 20px;
+      animation: fadeInUp 0.8s 0.2s ease both;
+    }
+
+    .hero-title .line-cyan {
+      display: block;
+      color: var(--accent-cyan);
+      text-shadow: 0 0 40px rgba(0, 229, 255, 0.5);
+      animation: glitch 8s 3s ease infinite;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--white-muted);
+      margin-bottom: 50px;
+      line-height: 1.7;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      animation: fadeInUp 0.8s 0.4s ease both;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.8s 0.6s ease both;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: float 2s ease-in-out infinite;
+    }
+
+    .hero-scroll span {
+      font-family: var(--font-display);
+      font-size: 0.55rem;
+      letter-spacing: 3px;
+      color: var(--slate-pale);
+      text-transform: uppercase;
+    }
+
+    .scroll-arrow {
+      width: 20px;
+      height: 20px;
+      border-right: 2px solid var(--accent-cyan);
+      border-bottom: 2px solid var(--accent-cyan);
+      transform: rotate(45deg);
+      animation: bounce 1.5s ease infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: rotate(45deg) translate(0,0); opacity: 1; }
+      50% { transform: rotate(45deg) translate(4px, 4px); opacity: 0.5; }
+    }
+
+    /* ---- STATS ---- */
+    .stats-section {
+      padding: 60px 0;
+      border-top: 1px solid var(--border-glow);
+      border-bottom: 1px solid var(--border-glow);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 30px;
+      border-right: 1px solid var(--border-glow);
+    }
+
+    .stat-item:last-child { border-right: none; }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--accent-cyan);
+      text-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      color: var(--slate-pale);
+      text-transform: uppercase;
+      font-family: var(--font-display);
+    }
+
+    /* ---- ABOUT PREVIEW ---- */
+    .about-preview {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-text h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      color: var(--white);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .about-text p {
+      color: var(--white-muted);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .about-visual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .about-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-glow);
+      border-radius: 10px;
+      padding: 25px 20px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .about-card:hover {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);
+      transform: translateY(-3px);
+    }
+
+    .about-card-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .about-card-title {
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      letter-spacing: 1.5px;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+    }
+
+    .about-card-span {
+      grid-column: 1 / -1;
+    }
+
+    /* ---- FEATURES ---- */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-glow);
+      border-radius: 12px;
+      padding: 36px 28px;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-bright), var(--accent-cyan));
+      transition: width 0.4s ease;
+    }
+
+    .feature-card:hover::after { width: 100%; }
+
+    .feature-card:hover {
+      border-color: var(--blue-glow);
+      box-shadow: var(--glow-shadow);
+      transform: translateY(-6px);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .feature-title {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      color: var(--white);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .feature-desc {
+      font-size: 0.9rem;
+      color: var(--white-muted);
+      line-height: 1.7;
+    }
+
+    /* ---- ANNOUNCEMENT TICKER ---- */
+    .ticker-wrap {
+      background: rgba(0, 168, 255, 0.05);
+      border-top: 1px solid var(--border-glow);
+      border-bottom: 1px solid var(--border-glow);
+      padding: 14px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .ticker-content {
+      display: inline-block;
+      animation: ticker 25s linear infinite;
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      color: var(--accent-cyan);
+    }
+
+    .ticker-item {
+      margin-right: 80px;
+    }
+
+    .ticker-item::before {
+      content: '⬡ ';
+      color: var(--blue-bright);
+    }
+
+    @keyframes ticker {
+      from { transform: translateX(100vw); }
+      to { transform: translateX(-100%); }
+    }
+
+    @media (max-width: 768px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border-glow); }
+      .about-preview { grid-template-columns: 1fr; gap: 40px; }
+      .features-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOADING SCREEN -->
+<div id="loading-screen">
+  <div class="loader-hex">⬡</div>
+  <div class="loader-text">INITIALIZING NEXGEN...</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="index.html" class="nav-logo">ACSC<span>Group 8</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="assignments.html">Assignments</a></li>
+    <li><a href="discussion.html">Discussion</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-content">
+      <div class="hero-badge">Chuka University · Applied Computer Science · 2028</div>
+      <h1 class="hero-title">
+        The Future Belongs<br>
+        <span class="line-cyan">to Those Who Code</span>
+      </h1>
+      <p class="hero-subtitle">
+        Welcome to ACSC Group 8 — Nine ambitious minds united by a passion for technology, 
+        collaboration, and pushing the boundaries of what's possible.
+      </p>
+      <div class="hero-buttons">
+        <a href="team.html" class="btn btn-primary">⬡ Meet the Team</a>
+        <a href="assignments.html" class="btn btn-outline">View Assignments →</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker-content">
+      <span class="ticker-item">Assignment 2 due Friday 28th March</span>
+      <span class="ticker-item">Group meeting scheduled: Thursday 7PM</span>
+      <span class="ticker-item">New discussion thread: Data Structures Review</span>
+      <span class="ticker-item">Project milestone 1 completed ✓</span>
+      <span class="ticker-item">CAT results posted on student portal</span>
+      <span class="ticker-item">Welcome to NexGen CS Group Website</span>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item reveal">
+          <div class="stat-number"><span data-counter="9">0</span></div>
+          <div class="stat-label">Members</div>
+        </div>
+        <div class="stat-item reveal" data-delay="100">
+          <div class="stat-number"><span data-counter="8">0</span></div>
+          <div class="stat-label">Assignments</div>
+        </div>
+        <div class="stat-item reveal" data-delay="200">
+          <div class="stat-number"><span data-counter="24">0</span></div>
+          <div class="stat-label">Discussions</div>
+        </div>
+        <div class="stat-item reveal" data-delay="300">
+          <div class="stat-number"><span data-counter="3">0</span></div>
+          <div class="stat-label">Projects</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT PREVIEW -->
+  <section class="page-section">
+    <div class="container">
+      <div class="about-preview">
+        <div class="about-text reveal">
+          <span class="section-tag">Who We Are</span>
+          <h2>A Team Built for <span class="text-cyan">Innovation</span></h2>
+          <p>We are a group of 9 Applied computer science students — 8 young men and one exceptional lady — brought together by a shared dedication to academic excellence and technological discovery.</p>
+          <p>From algorithm design to full-stack development, we tackle every challenge with curiosity and determination. This website is both our digital HQ and our first major collaborative project.</p>
+          <a href="team.html" class="btn btn-outline" style="margin-top:20px">Meet the Team →</a>
+        </div>
+        <div class="about-visual reveal" data-delay="200">
+          <div class="about-card">
+            <div class="about-card-icon">💡</div>
+            <div class="about-card-title">Innovation</div>
+          </div>
+          <div class="about-card">
+            <div class="about-card-icon">🔗</div>
+            <div class="about-card-title">Collaboration</div>
+          </div>
+          <div class="about-card">
+            <div class="about-card-icon">⚡</div>
+            <div class="about-card-title">Excellence</div>
+          </div>
+          <div class="about-card">
+            <div class="about-card-icon">🚀</div>
+            <div class="about-card-title">Growth</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="page-section" style="padding-top:0">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">What You'll Find Here</span>
+        <h2 class="section-title">Everything in One <span class="highlight">Hub</span></h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card reveal">
+          <span class="feature-icon">👥</span>
+          <div class="feature-title">Team Profiles</div>
+          <p class="feature-desc">Get to know every member of ACSC Group 8 — our skills, roles, and what drives each of us in the world of computer science.</p>
+        </div>
+        <div class="feature-card reveal" data-delay="150">
+          <span class="feature-icon">📋</span>
+          <div class="feature-title">Assignments</div>
+          <p class="feature-desc">Track all group assignments, deadlines, and submission statuses. Organized, clear, and always up to date so no one falls behind.</p>
+        </div>
+        <div class="feature-card reveal" data-delay="300">
+          <span class="feature-icon">💬</span>
+          <div class="feature-title">Discussion Board</div>
+          <p class="feature-desc">Share ideas, ask questions, and collaborate on concepts. Our interactive discussion board keeps the conversation going around the clock.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">⬡ ACSC Group 8</span>
+  <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="assignments.html">Assignments</a></li>
+    <li><a href="discussion.html">Discussion</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <p>© 2026 ACSC Group 8 · Chuka University · Applied Computer Science </p>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  initParticles('hero-canvas');
+</script>
+</body>
+</html>

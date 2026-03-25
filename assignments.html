@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ACSC Group 8 | Assignments</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .page-hero {
+      padding: 140px 0 80px;
+      text-align: center;
+    }
+
+    .page-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .page-hero p {
+      color: var(--white-muted);
+      font-size: 1rem;
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ---- FILTER TABS ---- */
+    .filter-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .filter-tab {
+      font-family: var(--font-display);
+      font-size: 0.6rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border: 1px solid var(--border-glow);
+      border-radius: 4px;
+      background: transparent;
+      color: var(--slate-pale);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .filter-tab.active,
+    .filter-tab:hover {
+      background: rgba(0, 168, 255, 0.1);
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    /* ---- ASSIGNMENT CARDS ---- */
+    .assignments-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 80px;
+    }
+
+    .assignment-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-glow);
+      border-radius: 12px;
+      padding: 28px 32px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 24px;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .assignment-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--border-glow);
+      transition: background 0.3s;
+    }
+
+    .assignment-card:hover {
+      border-color: var(--blue-glow);
+      box-shadow: var(--glow-shadow);
+      transform: translateX(6px);
+    }
+
+    .assignment-card.status-done::before { background: #4caf50; }
+    .assignment-card.status-active::before { background: var(--accent-cyan); }
+    .assignment-card.status-pending::before { background: var(--accent-gold); }
+
+    .assignment-number {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--blue-mid);
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .assignment-info h3 {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .assignment-info .meta {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .meta-item {
+      font-size: 0.78rem;
+      color: var(--slate-pale);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .assignment-status {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    .status-badge {
+      font-family: var(--font-display);
+      font-size: 0.55rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 50px;
+      white-space: nowrap;
+    }
+
+    .badge-done {
+      background: rgba(76, 175, 80, 0.15);
+      color: #81c784;
+      border: 1px solid rgba(76, 175, 80, 0.3);
+    }
+
+    .badge-active {
+      background: rgba(0, 229, 255, 0.1);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+    }
+
+    .badge-pending {
+      background: rgba(255, 213, 79, 0.1);
+      color: var(--accent-gold);
+      border: 1px solid rgba(255, 213, 79, 0.3);
+    }
+
+    .progress-wrap {
+      width: 100px;
+    }
+
+    .progress-label {
+      font-family: var(--font-display);
+      font-size: 0.55rem;
+      color: var(--slate-pale);
+      text-align: right;
+      margin-bottom: 4px;
+      letter-spacing: 1px;
+    }
+
+    .progress-bar {
+      height: 4px;
+      background: var(--slate-dark);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue-bright), var(--accent-cyan));
+      border-radius: 2px;
+      transition: width 1s ease;
+    }
+
+    /* ---- UPCOMING DEADLINES ---- */
+    .deadlines-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 80px;
+    }
+
+    .deadline-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-glow);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.3s;
+    }
+
+    .deadline-card:hover {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 20px rgba(0, 229, 255, 0.1);
+      transform: translateY(-3px);
+    }
+
+    .deadline-date {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--accent-cyan);
+      text-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+      line-height: 1;
+    }
+
+    .deadline-month {
+      font-family: var(--font-display);
+      font-size: 0.6rem;
+      letter-spacing: 3px;
+      color: var(--slate-pale);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .deadline-title {
+      font-size: 0.9rem;
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .deadline-course {
+      font-size: 0.75rem;
+      color: var(--slate-pale);
+      margin-top: 4px;
+    }
+
+    @media (max-width: 768px) {
+      .assignment-card {
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto auto;
+      }
+      .assignment-status {
+        grid-column: 2;
+        align-items: flex-start;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      .deadlines-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="loading-screen">
+  <div class="loader-hex">⬡</div>
+  <div class="loader-text">LOADING ASSIGNMENTS...</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<nav>
+  <a href="index.html" class="nav-logo">ACSC<span>Group 8</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="assignments.html" class="active">Assignments</a></li>
+    <li><a href="discussion.html">Discussion</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<main>
+  <div class="page-hero">
+    <div class="container">
+      <span class="section-tag">Academic Track</span>
+      <h1>Group <span class="text-cyan">Assignments</span></h1>
+      <p>Stay on top of deadlines, track progress, and submit with confidence. Every task, every milestone — all in one place.</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- FILTERS -->
+    <div class="filter-tabs reveal">
+      <button class="filter-tab active" onclick="filterAssignments('all', this)">All</button>
+      <button class="filter-tab" onclick="filterAssignments('active', this)">In Progress</button>
+      <button class="filter-tab" onclick="filterAssignments('done', this)">Completed</button>
+      <button class="filter-tab" onclick="filterAssignments('pending', this)">Upcoming</button>
+    </div>
+
+    <!-- ASSIGNMENT LIST -->
+    <div class="assignments-list" id="assignments-list">
+
+      <div class="assignment-card status-done reveal" data-status="done">
+        <div class="assignment-number">01</div>
+        <div class="assignment-info">
+          <h3>Introduction to Web Technologies — HTML & CSS Basics</h3>
+          <div class="meta">
+            <span class="meta-item">📅 Due: 15 Feb 2024</span>
+            <span class="meta-item">👤 Lead: Brian Otieno</span>
+            <span class="meta-item">📚 Course: Web Development</span>
+          </div>
+        </div>
+        <div class="assignment-status">
+          <span class="status-badge badge-done">Submitted ✓</span>
+          <div class="progress-wrap">
+            <div class="progress-label">100%</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="assignment-card status-done reveal" data-status="done">
+        <div class="assignment-number">02</div>
+        <div class="assignment-info">
+          <h3>Database Design — Entity Relationship Diagrams & Normalization</h3>
+          <div class="meta">
+            <span class="meta-item">📅 Due: 28 Feb 2024</span>
+            <span class="meta-item">👤 Lead: George Mutua</span>
+            <span class="meta-item">📚 Course: Database Systems</span>
+          </div>
+        </div>
+        <div class="assignment-status">
+          <span class="status-badge badge-done">Submitted ✓</span>
+          <div class="progress-wrap">
+            <div class="progress-label">100%</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="assignment-card status-done reveal" data-status="done">
+        <div class="assignment-number">03</div>
+        <div class="assignment-info">
+          <h3>Algorithm Analysis — Sorting Algorithms & Big-O Complexity</h3>
+          <div class="meta">
+            <span class="meta-item">📅 Due: 10 Mar 2024</span>
+            <span class="meta-item">👤 Lead: Charles Mwangi</span>
+            <span class="meta-item">📚 Course: Data Structures & Algorithms</span>
+          </div>
+        </div>
+        <div class="assignment-status">
+          <span class="status-badge badge-done">Submitted ✓</span>
+          <div class="progress-wrap">
+            <div class="progress-label">100%</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="assignment-card status-active reveal" data-status="active">
+        <div class="assignment-number">04</div>
+        <div class="assignment-info">
+          <h3>Group Website — Design & Development with HTML, CSS & JavaScript</h3>
+          <div class="meta">
+            <span class="meta-item">📅 Due: 28 Mar 2024</span>
+            <span class="meta-item">👤 Lead: Joy Achieng</span>
+            <span class="meta-item">📚 Course: Web Development</span>
+          </div>
+        </div>
+        <div class="assignment-status">
+          <span class="status-badge badge-active">In Progress</span>
+          <div class="progress-wrap">
+            <div class="progress-label">85%</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:85%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="assignment-card status-active reveal" data-status="active">
+        <div class="assignment-number">05</div>
+        <div class="assignment-info">
+          <h3>Operating Systems — Process Scheduling Simulation</h3>
+          <div class="meta">
+            <span class="meta-item">📅 Due: 5 Apr 2024</span>
+            <span class="meta-item">👤 Lead: David Njoroge</span>
+            <span class="meta-item">📚 Course: Operating Systems</span>
+          </div>
+        </div>
+        <div class="assignment-status">
+          <span class="status-badge badge-active">In Progress</span>
+          <div class="progress-wrap">
+            <div class="progress-label">50%</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:50%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="assignment-card status-pending reveal" data-status="pending">
+        <div class="assignment-number">06</div>
+        <div class="assignment-info">
+          <h3>Machine Learning Fundamentals — Classification Model Implementation</h3>
+          <div class="meta">
+            <span class="meta-item">📅 Due: 20 Apr 2024</span>
+            <span class="meta-item">👤 Lead: Felix Wambua</span>
+            <span class="meta-item">📚 Course: Introduction to AI</span>
+          </div>
+        </div>
+        <div class="assignment-status">
+          <span class="status-badge badge-pending">Upcoming</span>
+          <div class="progress-wrap">
+            <div class="progress-label">10%</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:10%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="assignment-card status-pending reveal" data-status="pending">
+        <div class="assignment-number">07</div>
+        <div class="assignment-info">
+          <h3>Network Security — Vulnerability Assessment Report</h3>
+          <div class="meta">
+            <span class="meta-item">📅 Due: 3 May 2024</span>
+            <span class="meta-item">👤 Lead: Henry Omondi</span>
+            <span class="meta-item">📚 Course: Cybersecurity</span>
+          </div>
+        </div>
+        <div class="assignment-status">
+          <span class="status-badge badge-pending">Upcoming</span>
+          <div class="progress-wrap">
+            <div class="progress-label">5%</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:5%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="assignment-card status-pending reveal" data-status="pending">
+        <div class="assignment-number">08</div>
+        <div class="assignment-info">
+          <h3>Final Project — Full-Stack Application Development & Deployment</h3>
+          <div class="meta">
+            <span class="meta-item">📅 Due: 30 May 2024</span>
+            <span class="meta-item">👤 Lead: Alex Kamau</span>
+            <span class="meta-item">📚 Course: Software Engineering</span>
+          </div>
+        </div>
+        <div class="assignment-status">
+          <span class="status-badge badge-pending">Upcoming</span>
+          <div class="progress-wrap">
+            <div class="progress-label">0%</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- UPCOMING DEADLINES -->
+    <div class="section-header reveal">
+      <span class="section-tag">Time Remaining</span>
+      <h2 class="section-title">Upcoming <span class="highlight">Deadlines</span></h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="deadlines-grid">
+      <div class="deadline-card reveal">
+        <div class="deadline-date">28</div>
+        <div class="deadline-month">March 2024</div>
+        <div class="deadline-title">Group Website Submission</div>
+        <div class="deadline-course">Web Development</div>
+      </div>
+      <div class="deadline-card reveal" data-delay="150">
+        <div class="deadline-date">05</div>
+        <div class="deadline-month">April 2024</div>
+        <div class="deadline-title">OS Process Scheduling</div>
+        <div class="deadline-course">Operating Systems</div>
+      </div>
+      <div class="deadline-card reveal" data-delay="300">
+        <div class="deadline-date">20</div>
+        <div class="deadline-month">April 2024</div>
+        <div class="deadline-title">ML Classification Model</div>
+        <div class="deadline-course">Introduction to AI</div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <span class="footer-logo">⬡ ACSC Group 8</span>
+  <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="assignments.html">Assignments</a></li>
+    <li><a href="discussion.html">Discussion</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <p>© 2026 ACSC Group 8· Chuka University · Applied Computer Science </p>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  function filterAssignments(status, btn) {
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.assignment-card').forEach(card => {
+      if (status === 'all' || card.dataset.status === status) {
+        card.style.display = 'grid';
+        card.style.animation = 'fadeInUp 0.4s ease both';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ACSC Group 8 | Team</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .page-hero {
+      padding: 140px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 168, 255, 0.06);
+      animation: spin 30s linear infinite;
+    }
+
+    .page-hero::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 168, 255, 0.08);
+      animation: spin 20s linear infinite reverse;
+    }
+
+    .page-hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .page-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .page-hero p {
+      color: var(--white-muted);
+      font-size: 1.05rem;
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ---- TEAM GRID ---- */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 28px;
+      padding-bottom: 80px;
+    }
+
+    .member-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-glow);
+      border-radius: 16px;
+      padding: 36px 28px;
+      text-align: center;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+    }
+
+    .member-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-bright), var(--accent-cyan));
+      transform: scaleX(0);
+      transition: transform 0.4s;
+    }
+
+    .member-card:hover {
+      border-color: var(--blue-glow);
+      box-shadow: var(--glow-shadow), 0 20px 60px rgba(0,0,0,0.4);
+      transform: translateY(-8px);
+    }
+
+    .member-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    /* Special style for the lady member */
+    .member-card.star {
+      border-color: rgba(255, 213, 79, 0.4);
+    }
+
+    .member-card.star:hover {
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 30px rgba(255, 213, 79, 0.2), 0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    .member-card.star::before {
+      background: linear-gradient(90deg, var(--accent-gold), var(--blue-electric));
+    }
+
+    .member-avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      border: 2px solid var(--border-glow);
+      background: rgba(26, 58, 107, 0.5);
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .member-card:hover .member-avatar {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+      transform: scale(1.05);
+    }
+
+    .member-card.star .member-avatar {
+      border-color: rgba(255, 213, 79, 0.5);
+    }
+
+    .member-card.star:hover .member-avatar {
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 20px rgba(255, 213, 79, 0.4);
+    }
+
+    .member-number {
+      position: absolute;
+      bottom: -4px;
+      right: -4px;
+      width: 26px;
+      height: 26px;
+      background: var(--blue-bright);
+      border-radius: 50%;
+      font-family: var(--font-display);
+      font-size: 0.6rem;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--blue-deep);
+    }
+
+    .member-name {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
+
+    .member-role {
+      font-size: 0.72rem;
+      color: var(--accent-cyan);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-family: var(--font-display);
+      margin-bottom: 16px;
+    }
+
+    .member-card.star .member-role {
+      color: var(--accent-gold);
+    }
+
+    .member-bio {
+      font-size: 0.88rem;
+      color: var(--white-muted);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .member-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: center;
+    }
+
+    .skill-tag {
+      background: rgba(30, 111, 255, 0.15);
+      border: 1px solid rgba(30, 111, 255, 0.3);
+      border-radius: 4px;
+      padding: 4px 10px;
+      font-size: 0.68rem;
+      letter-spacing: 1px;
+      color: var(--blue-glow);
+      font-family: var(--font-display);
+    }
+
+    .member-card.star .skill-tag {
+      background: rgba(255, 213, 79, 0.1);
+      border-color: rgba(255, 213, 79, 0.3);
+      color: var(--accent-gold);
+    }
+
+    /* ---- LEADER BANNER ---- */
+    .leader-banner {
+      background: linear-gradient(135deg, rgba(30, 111, 255, 0.15), rgba(0, 168, 255, 0.08));
+      border: 1px solid var(--border-glow);
+      border-radius: 16px;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .leader-icon {
+      font-size: 4rem;
+      flex-shrink: 0;
+    }
+
+    .leader-info h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--accent-cyan);
+      margin-bottom: 8px;
+    }
+
+    .leader-info p {
+      color: var(--white-muted);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+      .team-grid { grid-template-columns: 1fr; }
+      .leader-banner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="loading-screen">
+  <div class="loader-hex">⬡</div>
+  <div class="loader-text">LOADING PROFILES...</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<nav>
+  <a href="index.html" class="nav-logo">ACSC<span>Group 8</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="team.html" class="active">Team</a></li>
+    <li><a href="assignments.html">Assignments</a></li>
+    <li><a href="discussion.html">Discussion</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<main>
+  <div class="page-hero">
+    <div class="page-hero-content container">
+      <span class="section-tag">The People Behind the Code</span>
+      <h1>Meet the <span class="text-cyan">Team</span></h1>
+      <p>Nine brilliant minds, one shared mission — to learn, build, and innovate together throughout our computer science journey.</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- LEADER BANNER -->
+    <div class="leader-banner reveal">
+      <div class="leader-icon">🌟</div>
+      <div class="leader-info">
+        <h3>Group Leader: Francis Outa</h3>
+        <p>Leading ACSC Group 8 with a focus on clear communication, shared responsibility, and mutual growth. Every member contributes, every voice matters. We code as one.</p>
+      </div>
+    </div>
+
+    <!-- TEAM GRID -->
+    <div class="team-grid">
+
+      <div class="member-card reveal">
+        <div class="member-avatar">
+          👨‍💻
+          <div class="member-number">01</div>
+        </div>
+        <div class="member-name">Francis Outa</div>
+        <div class="member-reg">REG: EB3/74675/24</div>
+        <div class="member-role">Group Leader · Backend Dev</div>
+        <p class="member-bio">The architect of our group's vision. Francis keeps us on track with sharp planning skills and a deep love for server-side development and databases.</p>
+        <div class="member-skills">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Django</span>
+          <span class="skill-tag">MySQL</span>
+        </div>
+      </div>
+
+	  <!-- THE LADY MEMBER — GOLD STAR TREATMENT -->
+      <div class="member-card star reveal" data-delay="320">
+        <div class="member-avatar">
+          👩‍💻
+          <div class="member-number" style="background: var(--accent-gold); color: var(--blue-deep);">10</div>
+        </div>
+        <div class="member-name">Asha Wambui</div>
+        <div class="member-role">Full-Stack · Tech Lead</div>
+        <p class="member-bio">Asha is the group's shining beacon — a full-stack developer, creative problem solver, and the person everyone turns to when the code won't cooperate. Absolutely indispensable.</p>
+        <div class="member-skills">
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">Node.js</span>
+          <span class="skill-tag">UI/UX</span>
+          <span class="skill-tag">Leadership</span>
+        </div>
+      </div>
+
+      <div class="member-card reveal" data-delay="80">
+        <div class="member-avatar">
+          👨‍💻
+          <div class="member-number">02</div>
+        </div>
+        <div class="member-name">Eric Ndiritu</div>
+        <div class="member-reg">REG: EB3/80306/24</div>
+        <div class="member-role">Frontend Developer</div>
+        <p class="member-bio">The visual wizard of the group. Eric turns wireframes into pixel-perfect, responsive interfaces with an eye for detail and a passion for UX.</p>
+        <div class="member-skills">
+          <span class="skill-tag">HTML/CSS</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">Figma</span>
+        </div>
+      </div>
+
+      <div class="member-card reveal" data-delay="160">
+        <div class="member-avatar">
+          👨‍💻
+          <div class="member-number">03</div>
+        </div>
+        <div class="member-name">Wanjiru Gideon Kuria</div>
+        <div class="member-reg">REG: EB3/80308/24 </div>
+        <div class="member-role">Java Specialist</div>
+        <p class="member-bio">Gideon lives and breathes Java. His competitive Java programming background makes him our go-to when Java related complexities Hits us.</p>
+        <div class="member-skills">
+          <span class="skill-tag">Java</span>
+          <span class="skill-tag">Spring Boot</span>
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">Java Swing</span>
+        </div>
+      </div>
+
+      <div class="member-card reveal" data-delay="80">
+        <div class="member-avatar">
+          👨‍💻
+          <div class="member-number">04</div>
+        </div>
+        <div class="member-name">James Mwachongo</div>
+        <div class="member-reg">REG: EB3/74671/24</div>
+        <div class="member-role">Systems & Networks</div>
+        <p class="member-bio">James is fascinated by how things connect at the lowest level. From OS internals to network protocols, he's the group's systems thinking expert.</p>
+        <div class="member-skills">
+          <span class="skill-tag">Linux</span>
+          <span class="skill-tag">Networking</span>
+          <span class="skill-tag">C</span>
+        </div>
+      </div>
+
+      <div class="member-card reveal" data-delay="160">
+        <div class="member-avatar">
+          👨‍💻
+          <div class="member-number">05</div>
+        </div>
+        <div class="member-name">Kelvin Muthama</div>
+        <div class="member-role">Mobile Developer</div>
+        <p class="member-bio">Kelvin is building the next great Kenyan app — one commit at a time. He brings Android and cross-platform expertise to every project discussion.</p>
+        <div class="member-skills">
+          <span class="skill-tag">Flutter</span>
+          <span class="skill-tag">Dart</span>
+          <span class="skill-tag">Firebase</span>
+        </div>
+      </div>
+
+      <div class="member-card reveal" data-delay="240">
+        <div class="member-avatar">
+          👨‍💻
+          <div class="member-number">06</div>
+        </div>
+        <div class="member-name">John Macharia</div>
+        <div class="member-role">MERN Stack Specialist</div>
+        <p class="member-bio">John is an experienced MERN fullstack developer,he talks and breathes Javascript.Our ultimate saviuor in MERN projects with full DevOpps practises .</p>
+        <div class="member-skills">
+          <span class="skill-tag">React JS</span>
+          <span class="skill-tag">Node JS</span>
+          <span class="skill-tag">MongoDB</span>
+        </div>
+      </div>
+
+      <div class="member-card reveal" data-delay="80">
+        <div class="member-avatar">
+          👨‍💻
+          <div class="member-number">07</div>
+        </div>
+        <div class="member-name">Caleb Otieno</div>
+        <div class="member-role">Database Administrator</div>
+        <p class="member-bio">George ensures our data is structured, secure, and scalable. From ER diagrams to query optimization, he's the silent powerhouse behind every project.</p>
+        <div class="member-skills">
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">MongoDB</span>
+          <span class="skill-tag">Casandra</span>
+        </div>
+      </div>
+
+      <div class="member-card reveal" data-delay="160">
+        <div class="member-avatar">
+          👨‍💻
+          <div class="member-number">08</div>
+        </div>
+        <div class="member-name">Erustus Ngetich</div>
+        <div class="member-reg">REG: EB3/74760/24</div>
+        <div class="member-role">Cybersecurity</div>
+        <p class="member-bio">Erustus keeps the group thinking defensively. Ethical hacking, penetration testing, and secure coding practices are his specialties — and he takes them seriously.</p>
+        <div class="member-skills">
+          <span class="skill-tag">Kali Linux</span>
+          <span class="skill-tag">Bash</span>
+          <span class="skill-tag">CTF</span>
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </div>
+</main>
+
+<footer>
+  <span class="footer-logo">⬡ ACSC Group 8</span>
+  <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="assignments.html">Assignments</a></li>
+    <li><a href="discussion.html">Discussion</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <p>© 2026 ACSC Group 8 · Chuka University  · Applied Computer Science </p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
