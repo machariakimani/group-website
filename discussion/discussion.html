@@ -4,307 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>NexGen CS Group | Discussion</title>
-  <link rel="stylesheet" href="style.css"/>
-  <style>
-    .page-hero {
-      padding: 140px 0 80px;
-      text-align: center;
-    }
-
-    .page-hero h1 {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 5vw, 4rem);
-      font-weight: 900;
-      color: var(--white);
-      margin-bottom: 16px;
-    }
-
-    .page-hero p {
-      color: var(--white-muted);
-      font-size: 1rem;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    /* ---- LAYOUT ---- */
-    .discussion-layout {
-      display: grid;
-      grid-template-columns: 300px 1fr;
-      gap: 30px;
-      padding-bottom: 80px;
-    }
-
-    /* ---- SIDEBAR ---- */
-    .sidebar-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border-glow);
-      border-radius: 12px;
-      padding: 24px;
-      margin-bottom: 20px;
-    }
-
-    .sidebar-title {
-      font-family: var(--font-display);
-      font-size: 0.65rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--accent-cyan);
-      margin-bottom: 16px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--border-glow);
-    }
-
-    .topic-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .topic-list li {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-size: 0.85rem;
-      color: var(--white-muted);
-    }
-
-    .topic-list li:hover {
-      background: rgba(0, 168, 255, 0.08);
-      color: var(--accent-cyan);
-    }
-
-    .topic-list .count {
-      font-family: var(--font-display);
-      font-size: 0.65rem;
-      background: rgba(0, 168, 255, 0.15);
-      color: var(--accent-cyan);
-      padding: 2px 8px;
-      border-radius: 50px;
-    }
-
-    .online-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .online-member {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.85rem;
-      color: var(--white-muted);
-    }
-
-    .online-dot {
-      width: 8px;
-      height: 8px;
-      background: #4caf50;
-      border-radius: 50%;
-      box-shadow: 0 0 6px rgba(76, 175, 80, 0.8);
-      flex-shrink: 0;
-    }
-
-    /* ---- DISCUSSION THREADS ---- */
-    .new-post-bar {
-      background: var(--card-bg);
-      border: 1px solid var(--border-glow);
-      border-radius: 12px;
-      padding: 20px 24px;
-      display: flex;
-      gap: 14px;
-      align-items: center;
-      margin-bottom: 24px;
-      transition: border-color 0.3s;
-    }
-
-    .new-post-bar:focus-within {
-      border-color: var(--accent-cyan);
-      box-shadow: 0 0 15px rgba(0, 229, 255, 0.1);
-    }
-
-    .new-post-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--blue-mid), var(--blue-bright));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      flex-shrink: 0;
-    }
-
-    .new-post-input {
-      flex: 1;
-      background: transparent;
-      border: none;
-      outline: none;
-      color: var(--white);
-      font-family: var(--font-body);
-      font-size: 0.9rem;
-    }
-
-    .new-post-input::placeholder {
-      color: var(--slate-light);
-    }
-
-    .thread-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border-glow);
-      border-radius: 12px;
-      padding: 28px;
-      margin-bottom: 16px;
-      transition: all 0.3s;
-      cursor: pointer;
-    }
-
-    .thread-card:hover {
-      border-color: var(--blue-glow);
-      box-shadow: 0 0 20px rgba(0, 168, 255, 0.1);
-      transform: translateX(4px);
-    }
-
-    .thread-header {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      margin-bottom: 14px;
-    }
-
-    .thread-avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      flex-shrink: 0;
-      border: 1px solid var(--border-glow);
-    }
-
-    .thread-meta {
-      flex: 1;
-    }
-
-    .thread-author {
-      font-family: var(--font-display);
-      font-size: 0.75rem;
-      color: var(--accent-cyan);
-      letter-spacing: 1px;
-      margin-bottom: 2px;
-    }
-
-    .thread-time {
-      font-size: 0.72rem;
-      color: var(--slate-pale);
-    }
-
-    .thread-tag {
-      font-family: var(--font-display);
-      font-size: 0.55rem;
-      letter-spacing: 1px;
-      padding: 4px 10px;
-      border-radius: 50px;
-      background: rgba(30, 111, 255, 0.15);
-      color: var(--blue-glow);
-      border: 1px solid rgba(30, 111, 255, 0.25);
-    }
-
-    .thread-title {
-      font-family: var(--font-display);
-      font-size: 0.9rem;
-      color: var(--white);
-      margin-bottom: 10px;
-      letter-spacing: 0.5px;
-      line-height: 1.4;
-    }
-
-    .thread-preview {
-      font-size: 0.85rem;
-      color: var(--white-muted);
-      line-height: 1.6;
-      margin-bottom: 16px;
-    }
-
-    .thread-footer {
-      display: flex;
-      gap: 20px;
-      align-items: center;
-    }
-
-    .thread-stat {
-      font-size: 0.75rem;
-      color: var(--slate-pale);
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      transition: color 0.2s;
-    }
-
-    .thread-stat:hover { color: var(--accent-cyan); }
-
-    /* ---- POST INPUT AREA (expanded) ---- */
-    .post-composer {
-      background: var(--card-bg);
-      border: 1px solid var(--accent-cyan);
-      border-radius: 12px;
-      padding: 24px;
-      margin-bottom: 24px;
-      display: none;
-      box-shadow: 0 0 20px rgba(0, 229, 255, 0.1);
-      animation: fadeInUp 0.3s ease;
-    }
-
-    .post-composer.visible { display: block; }
-
-    .composer-title {
-      font-family: var(--font-display);
-      font-size: 0.65rem;
-      letter-spacing: 2px;
-      color: var(--accent-cyan);
-      margin-bottom: 14px;
-      text-transform: uppercase;
-    }
-
-    .composer-input {
-      width: 100%;
-      background: rgba(26, 58, 107, 0.3);
-      border: 1px solid var(--border-glow);
-      border-radius: 8px;
-      padding: 14px;
-      color: var(--white);
-      font-family: var(--font-body);
-      font-size: 0.9rem;
-      resize: vertical;
-      min-height: 100px;
-      outline: none;
-      margin-bottom: 12px;
-      transition: border-color 0.3s;
-    }
-
-    .composer-input:focus {
-      border-color: var(--accent-cyan);
-    }
-
-    .composer-input::placeholder { color: var(--slate-light); }
-
-    .composer-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-    }
-
-    @media (max-width: 900px) {
-      .discussion-layout { grid-template-columns: 1fr; }
-    }
-  </style>
+  <link rel="stylesheet" href="../style.css"/>
+  <link rel="stylesheet" href="discussion.css"/>
+  
 </head>
 <body>
 
@@ -315,13 +17,13 @@
 </div>
 
 <nav>
-  <a href="index.html" class="nav-logo">ACSC<span>Group 8</span></a>
+  <a href="../home/index.html" class="nav-logo">ACSC<span>Group 8</span></a>
   <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="team.html">Team</a></li>
-    <li><a href="assignments.html">Assignments</a></li>
-    <li><a href="discussion.html" class="active">Discussion</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="../home/index.html">Home</a></li>
+    <li><a href="../team/team.html">Team</a></li>
+    <li><a href="../assignments/assignments.html">Assignments</a></li>
+    <li><a href="../discussion/discussion.html" class="active">Discussion</a></li>
+    <li><a href="../contact/contact.html">Contact</a></li>
   </ul>
   <div class="nav-hamburger">
     <span></span><span></span><span></span>
@@ -411,7 +113,7 @@
             <div class="thread-header">
               <div class="thread-avatar" style="background:rgba(0,168,255,0.15)">👩‍💻</div>
               <div class="thread-meta">
-                <div class="thread-author">Joy Achieng</div>
+                <div class="thread-author">Wanjiru Gideon</div>
                 <div class="thread-time">2 hours ago</div>
               </div>
               <span class="thread-tag">Assignments</span>
@@ -429,7 +131,7 @@
             <div class="thread-header">
               <div class="thread-avatar" style="background:rgba(30,111,255,0.15)">👨‍💻</div>
               <div class="thread-meta">
-                <div class="thread-author">Charles Mwangi</div>
+                <div class="thread-author">Asha Wambui</div>
                 <div class="thread-time">Yesterday, 6:30 PM</div>
               </div>
               <span class="thread-tag">Study Help</span>
@@ -447,7 +149,7 @@
             <div class="thread-header">
               <div class="thread-avatar" style="background:rgba(0,168,255,0.15)">👨‍💻</div>
               <div class="thread-meta">
-                <div class="thread-author">Felix Wambua</div>
+                <div class="thread-author">James Mwachongo</div>
                 <div class="thread-time">2 days ago</div>
               </div>
               <span class="thread-tag">Resources</span>
@@ -465,13 +167,13 @@
             <div class="thread-header">
               <div class="thread-avatar" style="background:rgba(26,58,107,0.5)">👨‍💻</div>
               <div class="thread-meta">
-                <div class="thread-author">Alex Kamau</div>
+                <div class="thread-author">Francis Outa</div>
                 <div class="thread-time">3 days ago</div>
               </div>
               <span class="thread-tag">General</span>
             </div>
             <div class="thread-title">Group meeting this Thursday — 7PM, Computer Lab 3 📅</div>
-            <p class="thread-preview">Reminder to everyone: we're meeting Thursday evening to finalize assignment 4 and start planning assignment 5. Please come prepared. George will bring the ERD templates. Joy will demo the website prototype...</p>
+            <p class="thread-preview">Reminder to everyone: we're meeting Thursday evening to finalize assignment 4 and start planning assignment 5. Please come prepared. George will bring the ERD templates. John will demo the website prototype...</p>
             <div class="thread-footer">
               <span class="thread-stat">💬 10 replies</span>
               <span class="thread-stat">👁️ 55 views</span>
@@ -483,13 +185,13 @@
             <div class="thread-header">
               <div class="thread-avatar" style="background:rgba(26,58,107,0.5)">👨‍💻</div>
               <div class="thread-meta">
-                <div class="thread-author">Henry Omondi</div>
+                <div class="thread-author">Erustus Kipkemboi</div>
                 <div class="thread-time">4 days ago</div>
               </div>
               <span class="thread-tag">Projects</span>
             </div>
             <div class="thread-title">Cybersecurity project idea — Group password manager using AES encryption</div>
-            <p class="thread-preview">For our final project I'm thinking we build a locally-hosted password manager. I can handle the encryption layer using AES-256. We'd need a frontend (Brian?) and a database (George?). Thoughts?</p>
+            <p class="thread-preview">For our final project I'm thinking we build a locally-hosted password manager. I can handle the encryption layer using AES-256. We'd need a frontend (Eric?) and a database (Caleb?). Thoughts?</p>
             <div class="thread-footer">
               <span class="thread-stat">💬 15 replies</span>
               <span class="thread-stat">👁️ 102 views</span>
@@ -506,16 +208,16 @@
 <footer>
   <span class="footer-logo">⬡ ACSC Group 8</span>
   <ul class="footer-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="team.html">Team</a></li>
-    <li><a href="assignments.html">Assignments</a></li>
-    <li><a href="discussion.html">Discussion</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="../home/index.html">Home</a></li>
+    <li><a href="../team/team.html">Team</a></li>
+    <li><a href="../assignments/assignments.html">Assignments</a></li>
+    <li><a href="../discussion/discussion.html">Discussion</a></li>
+    <li><a href="../contact/contact.html">Contact</a></li>
   </ul>
   <p>© 2026 ACSc Group 8 · Chuka University  · Applied Computer Science </p>
 </footer>
 
-<script src="script.js"></script>
+<script src="../script.js"></script>
 <script>
   function openComposer() {
     const composer = document.getElementById('composer');

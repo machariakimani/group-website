@@ -1,6 +1,4 @@
-// ============================================
-//  NEXGEN CS GROUP - Shared JavaScript
-// ============================================
+//  ACSC GROUP 8 - Shared JavaScript
 
 // ---- LOADING SCREEN ----
 window.addEventListener('load', () => {

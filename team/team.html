@@ -4,251 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ACSC Group 8 | Team</title>
-  <link rel="stylesheet" href="style.css"/>
-  <style>
-    .page-hero {
-      padding: 140px 0 80px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .page-hero::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 600px;
-      height: 600px;
-      border-radius: 50%;
-      border: 1px solid rgba(0, 168, 255, 0.06);
-      animation: spin 30s linear infinite;
-    }
-
-    .page-hero::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 400px;
-      height: 400px;
-      border-radius: 50%;
-      border: 1px solid rgba(0, 168, 255, 0.08);
-      animation: spin 20s linear infinite reverse;
-    }
-
-    .page-hero-content {
-      position: relative;
-      z-index: 2;
-    }
-
-    .page-hero h1 {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 5vw, 4rem);
-      font-weight: 900;
-      color: var(--white);
-      margin-bottom: 16px;
-    }
-
-    .page-hero p {
-      color: var(--white-muted);
-      font-size: 1.05rem;
-      max-width: 500px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
-
-    /* ---- TEAM GRID ---- */
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 28px;
-      padding-bottom: 80px;
-    }
-
-    .member-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border-glow);
-      border-radius: 16px;
-      padding: 36px 28px;
-      text-align: center;
-      transition: all 0.4s ease;
-      position: relative;
-      overflow: hidden;
-      cursor: default;
-    }
-
-    .member-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--blue-bright), var(--accent-cyan));
-      transform: scaleX(0);
-      transition: transform 0.4s;
-    }
-
-    .member-card:hover {
-      border-color: var(--blue-glow);
-      box-shadow: var(--glow-shadow), 0 20px 60px rgba(0,0,0,0.4);
-      transform: translateY(-8px);
-    }
-
-    .member-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    /* Special style for the lady member */
-    .member-card.star {
-      border-color: rgba(255, 213, 79, 0.4);
-    }
-
-    .member-card.star:hover {
-      border-color: var(--accent-gold);
-      box-shadow: 0 0 30px rgba(255, 213, 79, 0.2), 0 20px 60px rgba(0,0,0,0.4);
-    }
-
-    .member-card.star::before {
-      background: linear-gradient(90deg, var(--accent-gold), var(--blue-electric));
-    }
-
-    .member-avatar {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      margin: 0 auto 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.5rem;
-      border: 2px solid var(--border-glow);
-      background: rgba(26, 58, 107, 0.5);
-      position: relative;
-      transition: all 0.3s;
-    }
-
-    .member-card:hover .member-avatar {
-      border-color: var(--accent-cyan);
-      box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
-      transform: scale(1.05);
-    }
-
-    .member-card.star .member-avatar {
-      border-color: rgba(255, 213, 79, 0.5);
-    }
-
-    .member-card.star:hover .member-avatar {
-      border-color: var(--accent-gold);
-      box-shadow: 0 0 20px rgba(255, 213, 79, 0.4);
-    }
-
-    .member-number {
-      position: absolute;
-      bottom: -4px;
-      right: -4px;
-      width: 26px;
-      height: 26px;
-      background: var(--blue-bright);
-      border-radius: 50%;
-      font-family: var(--font-display);
-      font-size: 0.6rem;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 2px solid var(--blue-deep);
-    }
-
-    .member-name {
-      font-family: var(--font-display);
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--white);
-      margin-bottom: 6px;
-      letter-spacing: 1px;
-    }
-
-    .member-role {
-      font-size: 0.72rem;
-      color: var(--accent-cyan);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      font-family: var(--font-display);
-      margin-bottom: 16px;
-    }
-
-    .member-card.star .member-role {
-      color: var(--accent-gold);
-    }
-
-    .member-bio {
-      font-size: 0.88rem;
-      color: var(--white-muted);
-      line-height: 1.7;
-      margin-bottom: 20px;
-    }
-
-    .member-skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      justify-content: center;
-    }
-
-    .skill-tag {
-      background: rgba(30, 111, 255, 0.15);
-      border: 1px solid rgba(30, 111, 255, 0.3);
-      border-radius: 4px;
-      padding: 4px 10px;
-      font-size: 0.68rem;
-      letter-spacing: 1px;
-      color: var(--blue-glow);
-      font-family: var(--font-display);
-    }
-
-    .member-card.star .skill-tag {
-      background: rgba(255, 213, 79, 0.1);
-      border-color: rgba(255, 213, 79, 0.3);
-      color: var(--accent-gold);
-    }
-
-    /* ---- LEADER BANNER ---- */
-    .leader-banner {
-      background: linear-gradient(135deg, rgba(30, 111, 255, 0.15), rgba(0, 168, 255, 0.08));
-      border: 1px solid var(--border-glow);
-      border-radius: 16px;
-      padding: 40px;
-      display: flex;
-      align-items: center;
-      gap: 30px;
-      margin-bottom: 60px;
-    }
-
-    .leader-icon {
-      font-size: 4rem;
-      flex-shrink: 0;
-    }
-
-    .leader-info h3 {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      color: var(--accent-cyan);
-      margin-bottom: 8px;
-    }
-
-    .leader-info p {
-      color: var(--white-muted);
-      line-height: 1.7;
-      font-size: 0.95rem;
-    }
-
-    @media (max-width: 768px) {
-      .team-grid { grid-template-columns: 1fr; }
-      .leader-banner { flex-direction: column; text-align: center; }
-    }
-  </style>
+  <link rel="stylesheet" href="../style.css"/>
+  <link rel="stylesheet" href="team.css"/>
+  
 </head>
 <body>
 
@@ -259,13 +17,13 @@
 </div>
 
 <nav>
-  <a href="index.html" class="nav-logo">ACSC<span>Group 8</span></a>
+  <a href="../home/index.html" class="nav-logo">ACSC<span>Group 8</span></a>
   <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="team.html" class="active">Team</a></li>
-    <li><a href="assignments.html">Assignments</a></li>
-    <li><a href="discussion.html">Discussion</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="../home/index.html">Home</a></li>
+    <li><a href="../team/team.html" class="active">Team</a></li>
+    <li><a href="../assignments/assignments.html">Assignments</a></li>
+    <li><a href="../discussion/discussion.html">Discussion</a></li>
+    <li><a href="../contact/contact.html">Contact</a></li>
   </ul>
   <div class="nav-hamburger">
     <span></span><span></span><span></span>
@@ -448,15 +206,15 @@
 <footer>
   <span class="footer-logo">⬡ ACSC Group 8</span>
   <ul class="footer-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="team.html">Team</a></li>
-    <li><a href="assignments.html">Assignments</a></li>
-    <li><a href="discussion.html">Discussion</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="../home/index.html">Home</a></li>
+    <li><a href="../team/team.html">Team</a></li>
+    <li><a href="../assignments/assignments.html">Assignments</a></li>
+    <li><a href="../discussion/discussion.html">Discussion</a></li>
+    <li><a href="../contact/contact.html">Contact</a></li>
   </ul>
   <p>© 2026 ACSC Group 8 · Chuka University  · Applied Computer Science </p>
 </footer>
 
-<script src="script.js"></script>
+<script src="../script.js"></script>
 </body>
 </html>

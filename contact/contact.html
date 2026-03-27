@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ACSC Group 8 | Contact</title>
+  <link rel="stylesheet" href="../style.css"/>
+  <link rel="stylesheet" href="contact.css"/>
+  <style>
+    
+  </style>
+</head>
+<body>
+
+<div id="loading-screen">
+  <div class="loader-hex">⬡</div>
+  <div class="loader-text">ESTABLISHING CONNECTION...</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<nav>
+  <a href="../home/index.html" class="nav-logo">ACSC<span>Group 8</span></a>
+  <ul class="nav-links">
+    <li><a href="../home/index.html">Home</a></li>
+    <li><a href="../team/team.html">Team</a></li>
+    <li><a href="../assignments/assignments.html">Assignments</a></li>
+    <li><a href="../discussion/discussion.html">Discussion</a></li>
+    <li><a href="../contact/contact.html" class="active">Contact</a></li>
+  </ul>
+  <div class="nav-hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<main>
+  <div class="page-hero">
+    <div class="container">
+      <span class="section-tag">Get in Touch</span>
+      <h1>Contact <span class="text-cyan">& Resources</span></h1>
+      <p>Reach out to the group, find our social channels, or access helpful academic resources all in one place.</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- CONTACT SECTION -->
+    <div class="contact-layout">
+
+      <!-- INFO CARDS -->
+      <div class="contact-info-block">
+        <div class="info-card reveal">
+          <div class="info-icon">🏛️</div>
+          <div class="info-details">
+            <h4>Institution</h4>
+            <p>Chuka University <br>Faculty of Science And Technology<br>Department of Computer Science</p>
+          </div>
+        </div>
+
+        <div class="info-card reveal" data-delay="100">
+          <div class="info-icon">📧</div>
+          <div class="info-details">
+            <h4>Group Email</h4>
+            <p><a target="_blank" href="mailto:devmacharia7@gmail.com">acscgroup8@chuka.ac.ke</a></p>
+          </div>
+        </div>
+
+        <div class="info-card reveal" data-delay="200">
+          <div class="info-icon">💬</div>
+          <div class="info-details">
+            <h4>WhatsApp Group</h4>
+            <p>Acsc group 8<br><a href="https://chat.whatsapp.com/LAIdqX4ouF4GajeTQxasT4">Join via invite link →</a></p>
+          </div>
+        </div>
+
+        <div class="info-card reveal" data-delay="300">
+          <div class="info-icon">📍</div>
+          <div class="info-details">
+            <h4>Campus Location</h4>
+            <p>Main Campus, Ndagani<br>Computer Lab 4, Science Tution Complex<br>Meeting Hours: Mon–Fri, 5–8 PM</p>
+          </div>
+        </div>
+
+        <div class="info-card reveal" data-delay="400">
+          <div class="info-icon">👤</div>
+          <div class="info-details">
+            <h4>Group Leader</h4>
+            <p>Francis Outa<br><a href="mailto:outafrancis@chuka.ac.ke">outafrank@chuka.ac.ke</a></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTACT FORM -->
+      <div class="contact-form-card reveal" data-delay="200">
+        <div id="form-main">
+          <div class="form-title">Send Us a Message</div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Your Name</label>
+              <input type="text" class="form-control" id="fname" placeholder="Full name..." />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" id="femail" placeholder="your@email.com" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Subject</label>
+            <select class="form-control" id="fsubject">
+              <option value="">Select a topic...</option>
+              <option>Assignment Inquiry</option>
+              <option>Group Collaboration</option>
+              <option>Website Feedback</option>
+              <option>Resource Request</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Message</label>
+            <textarea class="form-control" id="fmessage" placeholder="Type your message here..."></textarea>
+          </div>
+
+          <button class="btn btn-primary form-submit" onclick="submitForm()">⬡ Send Message</button>
+        </div>
+
+        <div class="form-success" id="form-success">
+          <div class="success-icon">✅</div>
+          <h3>Message Sent!</h3>
+          <p>Thanks for reaching out! A member of NexGen CS Group will get back to you shortly.</p>
+        </div>
+      </div>
+    </div>
+
+    
+  </div>
+</main>
+
+<footer>
+  <span class="footer-logo">⬡ ACSC Group 8</span>
+  <ul class="footer-links">
+    <li><a href="../home/index.html">Home</a></li>
+    <li><a href="../team/team.html">Team</a></li>
+    <li><a href="../assignments/assignments.html">Assignments</a></li>
+    <li><a href="../discussion/discussion.html">Discussion</a></li>
+    <li><a href="../contact/contact.html">Contact</a></li>
+  </ul>
+  <p>© 2026 ACSC Group 8 · Chuka University · Applied Computer Science </p>
+</footer>
+
+<script src="../script.js"></script>
+<script>
+  function submitForm() {
+    const name = document.getElementById('fname').value.trim();
+    const email = document.getElementById('femail').value.trim();
+    const subject = document.getElementById('fsubject').value;
+    const message = document.getElementById('fmessage').value.trim();
+
+    if (!name || !email || !subject || !message) {
+      alert('Please fill in all fields before sending.');
+      return;
+    }
+
+    document.getElementById('form-main').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  }
+</script>
+</body>
+</html>

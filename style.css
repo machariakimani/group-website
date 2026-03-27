@@ -22,7 +22,7 @@
   --accent-cyan: #00e5ff;
   --accent-gold: #ffd54f;
   --grid-line: rgba(0, 168, 255, 0.08);
-  --glow-shadow: 0 0 20px rgba(0, 168, 255, 0.4);
+  --glow-shadow: 0 0 20px rgba(0, 168, 255, 0.1);
   --card-bg: rgba(13, 31, 60, 0.7);
   --glass: rgba(26, 58, 107, 0.3);
   --border-glow: rgba(0, 168, 255, 0.3);
@@ -55,10 +55,10 @@ body::before {
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(var(--grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    linear-gradient(var(--grid-line) 1px, transparent 0.5px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 0.5px);
   background-size: 50px 50px;
-  animation: gridMove 20s linear infinite;
+  
   pointer-events: none;
   z-index: 0;
 }
@@ -195,7 +195,7 @@ main {
 /* ---- SECTION HEADERS ---- */
 .section-header {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 
 .section-tag {
@@ -288,8 +288,8 @@ main {
 }
 
 .btn-primary:hover {
-  box-shadow: 0 0 35px rgba(30, 111, 255, 0.7), 0 4px 15px rgba(0,0,0,0.3);
-  transform: translateY(-2px);
+  box-shadow: 0 0 35px rgba(30, 111, 255, 0.3), 0 4px 15px rgba(0,0,0,0.3);
+  
 }
 
 .btn-outline {
@@ -300,7 +300,7 @@ main {
 
 .btn-outline:hover {
   background: rgba(0, 229, 255, 0.1);
-  box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
 }
 
 /* ---- FOOTER ---- */

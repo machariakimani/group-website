@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ACSC Group 8 | Home</title>
+  <link rel="stylesheet" href="../style.css"/>
+  <link rel="stylesheet" href="./home.css"/>
+  
+</head>
+<body>
+
+<!-- LOADING SCREEN -->
+<div id="loading-screen">
+  <div class="loader-hex">⬡</div>
+  <div class="loader-text">INITIALIZING Website...</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="../home/index.html" class="nav-logo">ACSC<span>Group 8</span></a>
+  <ul class="nav-links">
+    <li><a href="../home/index.html" class="active">Home</a></li>
+    <li><a href="../team/team.html">Team</a></li>
+    <li><a href="../assignments/assignments.html">Assignments</a></li>
+    <li><a href="../discussion/discussion.html">Discussion</a></li>
+    <li><a href="../contact/contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-content">
+      <div class="hero-badge">Chuka University · Applied Computer Science · 2028</div>
+      <h1 class="hero-title">
+        The Future Belongs<br>
+        <span class="line-cyan">to The Techies</span>
+      </h1>
+      <p class="hero-subtitle">
+        Welcome to ACSC Group 8 — Nine ambitious minds united by a passion for technology, 
+        collaboration, and pushing the boundaries of what's possible.
+      </p>
+      <div class="hero-buttons">
+        <a href="../team/team.html" class="btn btn-primary">⬡ Meet the Team</a>
+        <a href="../assignments/assignments.html" class="btn btn-outline">View Assignments →</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <img class="hero-image" src="../images/d.PNG"/>
+    </div>
+   
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker-content">
+      <span class="ticker-item">Assignment 2 due Friday 28th March</span>
+      <span class="ticker-item">Exams are set to begin on 14th April</span>
+      <span class="ticker-item">Group meeting scheduled: Thursday 7PM</span>
+      <span class="ticker-item">New discussion thread: Data Structures Review</span>
+      <span class="ticker-item">Project milestone 1 completed ✓</span>
+      <span class="ticker-item">CAT results posted on student portal</span>
+      <span class="ticker-item">Welcome to ACSc Group 8 Official Website</span>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item reveal">
+          <div class="stat-number"><span data-counter="9">0</span></div>
+          <div class="stat-label">Members</div>
+        </div>
+        <div class="stat-item reveal" data-delay="100">
+          <div class="stat-number"><span data-counter="8">0</span></div>
+          <div class="stat-label">Assignments</div>
+        </div>
+        <div class="stat-item reveal" data-delay="200">
+          <div class="stat-number"><span data-counter="24">0</span></div>
+          <div class="stat-label">Discussions</div>
+        </div>
+        <div class="stat-item reveal" data-delay="300">
+          <div class="stat-number"><span data-counter="3">0</span></div>
+          <div class="stat-label">Projects</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT PREVIEW -->
+  <section class="page-section">
+    <div class="container">
+      <div class="about-preview">
+        <div class="about-text reveal">
+          <span class="section-tag">Who We Are</span>
+          <h2>A Team Built for <span class="text-cyan">Innovation</span></h2>
+          <p>We are a group of 9 Applied computer science students — 8 young men and one exceptional lady — brought together by a shared dedication to academic excellence and technological discovery.</p>
+          <p>From algorithm design to full-stack development, we tackle every challenge with curiosity and determination. This website is both our digital HQ and our first major collaborative project.</p>
+          <a href="team.html" class="btn btn-outline" style="margin-top:20px">Meet the Team →</a>
+        </div>
+        <div class="about-visual reveal" data-delay="200">
+          <div class="about-card">
+            <div class="about-card-icon">💡</div>
+            <div class="about-card-title">Innovation</div>
+          </div>
+          <div class="about-card">
+            <div class="about-card-icon">🔗</div>
+            <div class="about-card-title">Collaboration</div>
+          </div>
+          <div class="about-card">
+            <div class="about-card-icon">⚡</div>
+            <div class="about-card-title">Excellence</div>
+          </div>
+          <div class="about-card">
+            <div class="about-card-icon">🚀</div>
+            <div class="about-card-title">Growth</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="page-section" style="padding-top:0">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">What You'll Find Here</span>
+        <h2 class="section-title">Everything in One <span class="highlight">Hub</span></h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card reveal">
+          <span class="feature-icon">👥</span>
+          <div class="feature-title">Team Profiles</div>
+          <p class="feature-desc">Get to know every member of ACSC Group 8 — our skills, roles, and what drives each of us in the world of computer science.</p>
+        </div>
+        <div class="feature-card reveal" data-delay="150">
+          <span class="feature-icon">📋</span>
+          <div class="feature-title">Assignments</div>
+          <p class="feature-desc">Track all group assignments, deadlines, and submission statuses. Organized, clear, and always up to date so no one falls behind.</p>
+        </div>
+        <div class="feature-card reveal" data-delay="300">
+          <span class="feature-icon">💬</span>
+          <div class="feature-title">Discussion Board</div>
+          <p class="feature-desc">Share ideas, ask questions, and collaborate on concepts. Our interactive discussion board keeps the conversation going around the clock.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESOURCES SECTION -->
+    <div class="section-header reveal">
+      <span class="section-tag">Learning Materials</span>
+      <h2 class="section-title">Group <span class="highlight">Resources</span></h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="resources-grid">
+      <a href="#" class="resource-card reveal">
+        <span class="resource-icon">📘</span>
+        <div class="resource-name">W3Schools</div>
+        <p class="resource-desc">Comprehensive reference for HTML, CSS, JavaScript, and more. Perfect for web development beginners and revision.</p>
+        <span class="resource-link">→ www.w3schools.com</span>
+      </a>
+
+      <a href="#" class="resource-card reveal" data-delay="100">
+        <span class="resource-icon">🎓</span>
+        <div class="resource-name">Coursera</div>
+        <p class="resource-desc">Free and paid online courses from top universities. Our group uses it for AI, algorithms, and system design courses.</p>
+        <span class="resource-link">→ www.coursera.org</span>
+      </a>
+
+      <a href="#" class="resource-card reveal" data-delay="200">
+        <span class="resource-icon">💻</span>
+        <div class="resource-name">LeetCode</div>
+        <p class="resource-desc">Practice data structures, algorithms, and coding interview problems. Charles keeps the group streak going!</p>
+        <span class="resource-link">→ www.leetcode.com</span>
+      </a>
+
+      <a href="#" class="resource-card reveal" data-delay="100">
+        <span class="resource-icon">📖</span>
+        <div class="resource-name">MDN Web Docs</div>
+        <p class="resource-desc">Mozilla's authoritative documentation for web standards. The bible for HTML, CSS, and JavaScript specifics.</p>
+        <span class="resource-link">→ developer.mozilla.org</span>
+      </a>
+
+      <a href="#" class="resource-card reveal" data-delay="200">
+        <span class="resource-icon">🤖</span>
+        <div class="resource-name">Fast.ai</div>
+        <p class="resource-desc">Practical deep learning for coders. Felix's top pick for understanding machine learning from a code-first perspective.</p>
+        <span class="resource-link">→ www.fast.ai</span>
+      </a>
+
+      <a href="#" class="resource-card reveal" data-delay="300">
+        <span class="resource-icon">🔒</span>
+        <div class="resource-name">TryHackMe</div>
+        <p class="resource-desc">Gamified cybersecurity learning platform. Henry has been running us through beginner CTF challenges every weekend.</p>
+        <span class="resource-link">→ www.tryhackme.com</span>
+      </a>
+    </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">⬡ ACSC Group 8</span>
+  <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="../team/team.html">Team</a></li>
+    <li><a href="../assignments/assignments.html">Assignments</a></li>
+    <li><a href="../discussion/discussion.html">Discussion</a></li>
+    <li><a href="../contact//contact.html">Contact</a></li>
+  </ul>
+  <p>© 2026 ACSC Group 8 · Chuka University · Applied Computer Science </p>
+</footer>
+
+<script src="../script.js"></script>
+<script>
+  initParticles('hero-canvas');
+</script>
+</body>
+</html>
